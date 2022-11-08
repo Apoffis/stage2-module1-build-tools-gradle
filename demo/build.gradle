@@ -1,4 +1,40 @@
 //add everything here
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com.epam.demo'
+            artifactId = 'demo'
+            version = 0.1
+
+            from components.java
+        }
+    }
+}
+
+dependencies {
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title' : 'Utils', 'Implementation-Version': 1.1
+    }
+}
 
 test {
     useJUnitPlatform()

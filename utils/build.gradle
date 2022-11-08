@@ -1,33 +1,39 @@
+import com.sun.tools.javac.util.StringUtils
+
 plugins {
-    // id for library
-    // id for maven to publish jar to local repository
+    id 'java'
 }
 
 java {
-// provide sourceCompatibility
+    sourceCompatibility = "1.6"
+    targetCompatibility = "1.8"
 }
 
 repositories {
-// provide repository, where required dependencies are located
+    mavenCentral()
 }
 
 publishing {
     publications {
         maven(MavenPublication) {
-// provide groupId
-// provide artifactId
-// provide version
+            group 'utils.StringUtils'
+            version '1.0-SNAPSHOT'
+            artifactId 'stringUtils'
 
             from components.java
         }
     }
 }
 
-//add Apache Apache Commons Lang 3.10 (or higher) dependency
+dependencies {
+    constraints{
+        impementation 'org.apache.commons:commons-lang3:3.12.0'
+    }
+}
 
 jar {
     manifest {
-        //provide manifest with such attributes as 'Implementation-Title', 'Implementation-Version'
+        attributes 'Implementation-Title' : 'StringUtils', 'Implementation-Version': 3.12.0
     }
 }
 

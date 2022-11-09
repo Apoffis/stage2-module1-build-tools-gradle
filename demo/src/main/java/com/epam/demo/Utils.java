@@ -1,15 +1,28 @@
 package com.epam.demo;
 
-import org.apache.commons.lang3.StringUtils;
-
-
-import java.util.Collection;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Utils {
     public static boolean isAllPositiveNumbers(List<String> args) {
-        boolean res = args.stream().anyMatch(a -> !StringUtils.isNumeric(a) && Integer.parseInt(a) < 0);
-        return !res;
+        boolean isNotEmpty = args == null || args.isEmpty();
+        if(isNotEmpty) return false;
+        return args.stream().allMatch(Utils::isNumericAndPositive);
+    }
+
+    private static boolean isNumericAndPositive(String strNum) {
+        if (strNum == null || strNum.isEmpty()) {
+            return false;
+        }
+        try {
+            if (Double.parseDouble(strNum) > 0) {
+                return true;
+            }
+
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return false;
     }
 }

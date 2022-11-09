@@ -6,6 +6,6 @@ public class StringUtils {
 
         if (str == null || str.isEmpty()) return false;
 
-        return Integer.parseInt(str) > 0;
+        return Double.parseDouble(str) > 0;
     }
 }
